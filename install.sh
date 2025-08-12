@@ -4,18 +4,24 @@ set -e
 echo "=== Manjaro Sway Developer Bootstrap ==="
 
 # ----------------------------
-# 1. Update system
+# Update system
 # ----------------------------
 sudo pacman -Syu --noconfirm
 
 # ----------------------------
-# 2. Install essential tools
+# Install essential tools
 # ----------------------------
 echo "=== Installing essential Wayland tools ==="
 sudo pacman -S --noconfirm \
   neovim \
-  kitty \
-  ttf-jetbrains-mono nerd-fonts
+  lazygit \
+  kitty
+
+# ----------------------------
+# Setup git
+# ----------------------------
+git config --global user.email "coen@tcr-it.nl"
+git config --global user.name "Coen de Wit"
 
 # ----------------------------
 # Terminal Kitty Config
@@ -23,27 +29,39 @@ sudo pacman -S --noconfirm \
 echo "=== Overriding  Sway config ==="
 mkdir -p ~/.config/sway
 
-cat > ~/.config/sway/definitions.d <<'EOF'
+cat >~/.config/sway/definitions.d/terminal.conf <<'EOF'
 set $term kitty
 set $term_cwd kitty
 set $term_float kitty
 EOF
 
-cat > ~/.config/kitty/kitty.conf <<'EOF'
+cat >~/.config/sway/definitions.d/monitor.conf <<'EOF'
+output * scale 2
+EOF
+
+cat >~/.config/sway/definitions.d/keyboard.conf <<'EOF'
+input "type:keyboard" {
+    repeat_delay 150 
+    repeat_rate 50 
+}
+EOF
+
+cat >~/.config/kitty/kitty.conf <<'EOF'
 cursor_trail 10
-font_family JetBrains Mono
+font_family JetBrains Mono Nerd
 font_size 10.0
 EOF
 
 # ----------------------------
 # Neovim Config
 # ----------------------------
+rm -rf ~/.config/nvim
 git clone https://github.com/LazyVim/starter ~/.config/nvim
 
 rm -rf ~/.config/nvim/.git
 
 # ----------------------------
-# 5. Finish
+# Finish
 # ----------------------------
 echo "=== Bootstrap complete! ==="
-echo "Restart Sway to apply changes:  $mod+Shift+e"
+echo "Restart Sway to apply changes:  $mod+Shift+c"
