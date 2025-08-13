@@ -1,11 +1,16 @@
 echo "=== Mise installation ==="
 
-curl https://mise.run | sh
-
-echo "eval \"\$(~/.local/bin/mise activate zsh)\"" >>~/.zshrc
+if ! command -v mise &>/dev/null; then
+  curl https://get.mise.run | sh
+  echo "eval \"\$(~/.local/bin/mise activate zsh)\"" >>~/.zshrc
+fi
 
 echo "=== .Net installation ==="
-mise use --global dotnet
+if ! command -v dotnet &>/dev/null; then
+  mise install dotnet
+fi
 
 echo "=== Golang installation ==="
-mise use --global go
+if ! command -v go &>/dev/null; then
+  mise install go
+fi
