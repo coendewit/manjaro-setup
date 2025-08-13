@@ -7,4 +7,4 @@ source "$SCRIPT_DIR/../helper_functions.sh"
 
 install_if_not_found kitty
 
-create_symlink "$SCRIPT_DIR/kitty/kitty.conf" ~/.config/kitty
+create_symlink "$SCRIPT_DIR/kitty/kitty.conf" ~/.config/kitty/kitty.conf
