@@ -28,4 +28,4 @@ done
 # Finish
 # ----------------------------
 echo "=== Bootstrap complete! ==="
-echo "Restart Sway to apply changes:  $mod+Shift+c"
+echo "Restart Sway to apply changes: SUPER+Shift+c"
