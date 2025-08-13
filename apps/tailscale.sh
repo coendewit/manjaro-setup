@@ -10,6 +10,8 @@ if ! command -v tailscale &>/dev/null; then
 
   echo -e "\nStarting Tailscale..."
   sudo tailscale up --accept-routes
+else
+  echo -e "\nTailscale is already installed."
 fi
 
 create_webapp "Tailscale" "https://login.tailscale.com/admin/machines" https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/tailscale-light.png
